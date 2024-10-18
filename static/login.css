@@ -1,0 +1,98 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdf6ea;
+    margin: 0;
+}
+
+/* Header styles */
+header {
+    /* background-color: #ff8c00; */
+    /* color: #fff; */
+    text-align: center;
+    padding: 1rem 0;
+}
+
+/* Main login container styles */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    width: 400px;
+    /* background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.login-header {
+    /* background-color: #ff8c00;
+    color: #fff; */
+    padding: 15px;
+    /* border-radius: 10px 10px 0 0; */
+}
+
+.login-title {
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Login form styles */
+.login-form {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-button {
+    width: 100%;    
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #f9a846;
+}
+
+/* Register link styles */
+.register-link {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.register-link a {
+    text-decoration: none;
+    color: #ff8c00;
+    font-weight: bold;
+}

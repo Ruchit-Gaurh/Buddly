@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'chat.css' %}">
+    <title>Chatbox with User Profile Name</title>
+</head>
+<body>
+
+    <div class="chat-container">
+        <!-- Chat header with user profile name -->
+        <div class="chat-header" id="chat-header">
+            <!-- <img src="user-avatar.jpg" alt="User Avatar" class="profile-avatar"> -->
+            <span id="user-name">{{user}}</span>  <!-- Profile name will go here -->
+        </div>
+
+        <!-- Chat messages display -->
+        <div class="chat-display" id="chat-display">
+            <!-- Messages will be added dynamically here -->
+        </div>
+
+        <!-- Chat input field and send button -->
+        <div class="chat-input">
+            <input type="text" id="message" placeholder="Type a message...">
+            <button onclick="sendMessage()">&#9658;</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to send a message
+        function sendMessage() {
+            const messageInput = document.getElementById('message');
+            const chatDisplay = document.getElementById('chat-display');
+            const messageText = messageInput.value.trim();
+
+            if (messageText !== '') {
+                // Create message element for sent message
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message', 'message-sent');
+
+                const messageContent = document.createElement('div');
+                messageContent.classList.add('message-content');
+                messageContent.textContent = messageText;
+
+                messageElement.appendChild(messageContent);
+                chatDisplay.appendChild(messageElement);
+
+                // Scroll to the bottom of chat display
+                chatDisplay.scrollTop = chatDisplay.scrollHeight;
+
+                // Clear the input field
+                messageInput.value = '';
+
+                // Simulate a received message after a short delay
+                setTimeout(() => {
+                    const replyElement = document.createElement('div');
+                    replyElement.classList.add('chat-message', 'message-received');
+
+                    const avatar = document.createElement('div');
+                    avatar.classList.add('chat-avatar');
+
+                    const replyContent = document.createElement('div');
+                    replyContent.classList.add('message-content');
+                    replyContent.textContent = 'This is a reply!';
+
+                    replyElement.appendChild(avatar);
+                    replyElement.appendChild(replyContent);
+
+                    chatDisplay.appendChild(replyElement);
+                    chatDisplay.scrollTop = chatDisplay.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        
+    </script>
+
+</body>
+</html>

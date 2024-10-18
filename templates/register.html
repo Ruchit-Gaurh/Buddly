@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Witty App</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+</head>
+<body>
+    <main>
+        <div class="register-container">
+            <div class="register-header">
+                <h1 class="register-title">Register</h1>
+            </div>
+            <form class="register-form" action="register" method="post">
+                {% csrf_token %}
+                <div class="form-group username" id="username">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group email" id="email">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group password" id='password'>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+
+                <button id="c1" class="continue-button" onclick=hideone()><h2>Continue</h2></button>
+
+
+                <div class="form-group name" id="name" style="display:none">
+                    <label for="f_name">Name</label>
+                    <input type="name" id="name" name="name" required>
+                </div>
+                <div class="form-group picurl" id="pic" style="display:none">
+                    <label for="pic_url">Profile Photo URL</label>
+                    <input type="url" id="url" name="url" placeholder="Leave black for default photo" >
+                </div>
+                <div class="form-group age" id="age" style="display:none">
+                    <label for="age">Age</label>
+                    <input type="age" id="age" name="age" required>
+                </div>
+
+
+                <button id="c2" class="continue-button" style="display:none" onclick=hidetwo()><h2>Continue</h2></button>
+
+
+                <div class="form-group location" id="location" style="display:none">
+                    <label for="location">Age</label>
+                    <input type="location" id="location" name="location" required>
+                </div>
+                <div class="form-group drink" id="drink" style="display:none">
+                    <label for="drink">Do You Drink</label>
+                    <div style="display:flex; flex-direction: row; ">
+                    <input type="checkbox" id="drink" name="drink" style="width:auto" required>
+                    <label style=" margin-left: 10px;">Yes</label>
+                    </div>
+                </div>
+                <div class="form-group smoke" id="smoke" style="display:none">
+                    <label for="smoke">Do you Smoke</label>
+                    <div style="display:flex; flex-direction: row; ">
+                        <input type="checkbox" style="width:auto" id="smoke" name="smoke"  required>
+                        <label style=" margin-left: 10px;">Yes</label>
+                    </div>
+                </div>
+                <button class="register-button" id="sb" style="display:none" type="submit">Register</button>
+            </form>
+            <div class="login-link">
+                <p>Already have an account? <a href="login_page">Login</a></p>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    function hideone(){
+        document.getElementById("username").style.display = "none";
+        document.getElementById("email").style.display = "none";
+        document.getElementById("password").style.display = "none";
+        document.getElementById("c1").style.display = "none";
+        document.getElementById("name").style.display = "block";
+        document.getElementById("pic").style.display = "block";
+        document.getElementById("age").style.display = "block";
+        document.getElementById("c2").style.display = "block";
+    }
+
+    function hidetwo(){
+        document.getElementById("location").style.display = "block";
+        document.getElementById("drink").style.display = "block";
+        document.getElementById("smoke").style.display = "block";
+        document.getElementById("sb").style.display = "block";
+        document.getElementById("name").style.display = "none";
+        document.getElementById("pic").style.display = "none";
+        document.getElementById("age").style.display = "none";
+        document.getElementById("c2").style.display = "none";
+    }
+</script>
+</html>

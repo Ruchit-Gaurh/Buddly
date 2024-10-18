@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Buddy</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="profile">
+            <img src="https://images.unsplash.com/photo-1561727470-23974978c9f0?q=80&w=3018&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Profile" id="smp" class="profile-img">
+            <h2>{{user}}</h2>
+          </div>
+          <div class="menu">
+            <p>✨ Match Queue</p>
+            <p>See who chose you</p>
+          </div>
+          <a href="/chat">
+          <div class="conversations">
+            <h3>Conversation</h3>
+            <p>Aman Kumar</p>
+          </div>
+        </a>
+        </div>
+    
+        <!-- Main Profile Display -->
+        <div class="profile-display">
+          <div class="profile-info" id="profileCard">
+            <img src="" alt="Profile" class="profile-pic" id="profilePic">
+            <div class="profile-text">
+              <div class="basic-info">
+                <h1 id="profileName">Akshat Sharma</h1>
+                <p id="profileAge">Age, 21</p>
+                <p id="profileLocation">Jaipur, India</p>
+              </div>
+              <br/>
+              <hr/>
+              <div class="about">
+                <h2>About <span id="profileFirstName">Akshat</span></h2>
+                <div class="tags" id="profileTags">
+                  <span>Funny</span>
+                  <span>Hiking</span>
+                  <span>Helpful</span>
+                </div>
+              </div>
+              <br/>
+              <hr/>
+              <div class="preferences">
+                <h2>Preferences</h2>
+                <p id="profileGroup" class='mmb'>Group: 7-8 members</p>
+                <p id="profileTripDuration">7 Days Trip</p>
+                <p id="profileDate">Mid November</p>
+                <p id="profileLocationPreference">Ladakh</p>
+              </div>
+            </div>
+    
+            <!-- Button Overlay -->
+            <div class="actions">
+              <button class="dislike-btn" id="dislikeBtn">✘</button>
+              <button class="like-btn" id="likeBtn">✔</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <script>
+        const profileCard = document.getElementById("profileCard");
+        const likeBtn = document.getElementById("likeBtn");
+        const dislikeBtn = document.getElementById("dislikeBtn");
+    
+        // Simulated profile data
+        const profiles = [
+          {
+            name: "Akshat Sharma",
+            age: 21,
+            location: "Jaipur, India",
+            about: ["Funny", "Hiking", "Helpful"],
+            purl: "https://images.unsplash.com/photo-1561727470-23974978c9f0?q=80&w=3018&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            preferences: {
+              group: "7-8 members",
+              tripDuration: "7 Days Trip",
+              date: "Mid November",
+              location: "Ladakh"
+            }
+          },
+          {
+            name: "Rohit Mehta",
+            age: 28,
+            location: "Mumbai, India",
+            about: ["Adventurous", "Cycling", "Food Lover"],
+            purl: "https://images.unsplash.com/photo-1519713958759-6254243c4a53?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            preferences: {
+              group: "4-5 members",
+              tripDuration: "5 Days Trip",
+              date: "Late December",
+              location: "Goa"
+            }
+          },
+          {
+            name: "Sanya Verma",
+            age: 24,
+            location: "Delhi, India",
+            about: ["Photographer", "Nature Lover", "Friendly"],
+            purl: "https://plus.unsplash.com/premium_photo-1669882305273-674eff6567af?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            preferences: {
+              group: "3 members",
+              tripDuration: "10 Days Trip",
+              date: "Early January",
+              location: "Himachal"
+            }
+          }
+        ];
+    
+        let currentProfileIndex = 0;
+    
+        // Function to update profile card with new data
+        function updateProfile() {
+          const profile = profiles[currentProfileIndex];
+          
+          document.getElementById("profileName").textContent = profile.name;
+          document.getElementById("profilePic").src = profile.purl;
+          document.getElementById("profileAge").textContent = `Age, ${profile.age}`;
+          document.getElementById("profileLocation").textContent = profile.location;
+          document.getElementById("profileFirstName").textContent = profile.name.split(' ')[0];
+          
+          const tagsContainer = document.getElementById("profileTags");
+          tagsContainer.innerHTML = ""; // Clear existing tags
+          profile.about.forEach(tag => {
+            const span = document.createElement("span");
+            span.textContent = tag;
+            tagsContainer.appendChild(span);
+          });
+          
+          document.getElementById("profileGroup").textContent = `Group: ${profile.preferences.group}`;
+          document.getElementById("profileTripDuration").textContent = profile.preferences.tripDuration;
+          document.getElementById("profileDate").textContent = profile.preferences.date;
+          document.getElementById("profileLocationPreference").textContent = profile.preferences.location;
+        }
+    
+        // Move to the next profile after swipe
+        function showNextProfile() {
+          currentProfileIndex = (currentProfileIndex + 1) % profiles.length;
+          updateProfile();
+          profileCard.classList.remove("swipe-left", "swipe-right");
+          profileCard.style.display = "flex"; // Show the card again
+        }
+    
+        likeBtn.addEventListener("click", () => {
+          profileCard.classList.add("swipe-right");
+          setTimeout(() => {
+            profileCard.style.display = "none"; // Hide after animation
+            showNextProfile(); // Load new profile
+          }, 1000);
+        });
+    
+        dislikeBtn.addEventListener("click", () => {
+          profileCard.classList.add("swipe-left");
+          setTimeout(() => {
+            profileCard.style.display = "none"; // Hide after animation
+            showNextProfile(); // Load new profile
+          }, 1000);
+        });
+    
+        // Initialize with the first profile
+        updateProfile();
+      </script>
+</body>
+</html>
+{% comment %} https://images.unsplash.com/photo-1561727470-23974978c9f0?q=80&w=3018&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D {% endcomment %}
